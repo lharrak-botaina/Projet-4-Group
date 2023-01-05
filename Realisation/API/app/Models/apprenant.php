@@ -21,7 +21,7 @@ class Apprenant extends Model
         "CIN",
         "Date_naissance",
         "Image"
-    ]; 
+    ];
     public function groups(){
         return $this->belongsToMany(Groupes::class, 'groupes_apprenant');
     }

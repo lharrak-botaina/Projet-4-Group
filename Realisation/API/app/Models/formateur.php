@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Formateur extends Model
 {
     use HasFactory;
-    use HasFactory;
     protected $table = "formateur";
     public $timestamps= false;
     protected $fillable = [
