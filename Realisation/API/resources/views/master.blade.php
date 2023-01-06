@@ -9,15 +9,22 @@
 @include('layouts/sidebar')
 
   <!-- Content Wrapper. Contains page content -->
-@yield('content') 
+@yield('content')
 
 
- 
+
 <!-- /.content-wrapper -->
 @include('layouts/footer')
 
+
   <!-- Control Sidebar -->
 @include('layouts/scripts')
+
+{{-- @php
+$path = $_SERVER['PHP-SELF'];
+dd($path);
+@endphp --}}
+
 <!-- ./wrapper -->
 
 

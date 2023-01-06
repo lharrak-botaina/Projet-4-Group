@@ -32,7 +32,7 @@
 <script type="text/javascript" src="{{ URL::asset('assets/js/adminlte.min.js') }}"></script>
 
 
-<!-- React App -->
-
 <script type="text/javascript" src="{{ URL::asset('assets/js/static/js/main.79466e7d.js') }}"></script>
-<!-- <script type="text/javascript" src="{{ URL::asset('assets/js/static/js/main.79466e7d.js') }}"></script> -->
+<link rel="stylesheet" href="{{ URL::asset('assets/js/static/css/main.85e874c6.css') }}">
+
+<!-- React App -->
