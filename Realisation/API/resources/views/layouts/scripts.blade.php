@@ -30,3 +30,9 @@
 
 <!-- AdminLTE App -->
 <script type="text/javascript" src="{{ URL::asset('assets/js/adminlte.min.js') }}"></script>
+
+
+<!-- React App -->
+
+<script type="text/javascript" src="{{ URL::asset('assets/js/static/js/main.79466e7d.js') }}"></script>
+<!-- <script type="text/javascript" src="{{ URL::asset('assets/js/static/js/main.79466e7d.js') }}"></script> -->
