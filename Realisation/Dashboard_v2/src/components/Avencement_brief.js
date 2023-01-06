@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-export class BriefAv extends Component {
+export class Avencement_brief extends Component {
     constructor(props){
         super(props)
     }
@@ -20,4 +20,4 @@ export class BriefAv extends Component {
   }
 }
 
-export default BriefAv
+export default Avencement_brief

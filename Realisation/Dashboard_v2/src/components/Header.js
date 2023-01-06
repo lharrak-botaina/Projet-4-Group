@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-import StudentAv from "./Avencement_student";
-import BriefAv from "./Avencement_brief";
-import { GroupAv } from './Avencement_group';
+import Avencement_student from "./Avencement_student";
+import Avencement_brief from "./Avencement_brief";
+import  Avencement_group  from './Avencement_group';
 
 
 export default class Header extends Component {
@@ -63,15 +63,15 @@ export default class Header extends Component {
             <select onChange={this.getData} placeholder="année" id="input">
               <option>Année</option>
               {this.state.years.map((item) => (
-                <option value={item.id}>{item.formation_year}</option>
+                <option value={item.id}>{item.Annee_scolaire}</option>
               ))}
             </select>
           </div>
 
           <div className="row info">
             <div className="col-md-4">
-              <img src="" alt="logo"></img>
-              <span>{this.state.group.name}</span>
+              <img src={this.state.group.Logo} alt="logo"></img>
+              <span>{this.state.group.Nom_groupe}</span>
             </div>
             <div className="col-md-4 info">
               <p>{this.state.studentCount} apprenants</p>
@@ -82,11 +82,11 @@ export default class Header extends Component {
 
         <div className="row etatAv">
             <div className="col-md-6">
-                <GroupAv data={this.state.group_av}/>
-                <BriefAv data={this.state.briefs_av} />
+                <Avencement_group data={this.state.group_av}/>
+                <Avencement_brief data={this.state.briefs_av} />
             </div>
             <div className="col-md-6 etatAvSt">
-                <StudentAv data={this.state.brief_affs}/>
+                <Avencement_student data={this.state.brief_affs}/>
             </div>
         </div>
       </div>

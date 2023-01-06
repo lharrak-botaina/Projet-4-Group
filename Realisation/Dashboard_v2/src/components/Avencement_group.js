@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-export class GroupAv extends Component {
+export class Avencement_group extends Component {
     constructor(props){
         super(props)
     }
@@ -16,4 +16,4 @@ export class GroupAv extends Component {
   }
 }
 
-export default GroupAv
+export default Avencement_group
