@@ -53,15 +53,11 @@ export default class Header extends Component {
   }
 
   render() {
-    // console.log(this.state.brief_affs)
     return (
       <div>
         <div className="row">
-          <div className="col-md-8">
-            <h1>tableau de borde d'état d'avancement</h1>
-          </div>
           <div className="col-md-4 selectY">
-            <select onChange={this.getData} placeholder="année" id="input">
+            <select onChange={this.getData} placeholder="année" id="input" class="form-select">
               <option>Année</option>
               {this.state.years.map((item) => (
                 <option value={item.id}>{item.Annee_scolaire}</option>
@@ -71,11 +67,11 @@ export default class Header extends Component {
 
           <div className="row info">
             <div className="col-md-4">
-              <img src={this.state.group.Logo} alt="logo"></img>
+              {/* <img src="" alt="drag and drop"></img> */}
               <span>{this.state.group.Nom_groupe}</span>
             </div>
             <div className="col-md-4 info">
-              <p>{this.state.studentCount} apprenants</p>
+              <h3><i class="fa-solid fa-users-line"></i> {this.state.studentCount} Stagiaires de ce groupe :</h3>
             </div>
             <div className="col-md-4"></div>
           </div>

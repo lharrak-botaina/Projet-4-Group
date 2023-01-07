@@ -37,26 +37,21 @@ export class Avencement_student extends Component {
     componentDidMount() {
         this.getData()
       }
+
   render() {
     return (
+<div class="shadow-lg p-3 mb-5 bg-body rounded">
+
+      <h4><i class="fa-solid fa-user"></i>Etat d'avancement des Apprenants par Brief :</h4>
       <div>
-        <h4>Etat d'avancement des apprenants</h4>
-        <div className='studentAv'>
-            <select onChange={this.onChange}  placeholder="Brief" id="input">
-              <option>Brief</option>
-              {this.props.data.map((item) => (
-                <option value={item?.id}>{item?.Nom_du_brief}</option>
-              ))}
-            </select>
-            <div>
-                {this.state.students_av.map(item =>(
-                    <><p>{item.student_name}</p>
-                    <ProgressBar now={item.av} label={`${item.av}%`}/>
-                    </>
-                ))}
-            </div>
-        </div>
-      </div>
+    <select onChange={this.onChange} class="form-select"  placeholder="Brief" id="input">
+      <option>Brief</option>{this.props.data.map((item) => (<option value={item?.id}>{item?.Nom_du_brief}</option>))}
+    </select>
+    {this.state.students_av.map(item =>(<><p>{item.student_name}</p><ProgressBar now={item.av} label={`${item.av}%`}/></>))}
+     </div>
+      
+      
+</div>
     )
   }
 }
