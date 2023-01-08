@@ -21,7 +21,7 @@ class DashboardController extends Controller
         return $years;
     }
 
-    public function formation(Request $request, $id)
+    public function formation_years(Request $request, $id)
     {
         $year = AnneFormation::findOrFail($id);
         $group = Groupes::where('Annee_formation_id', $year->id)->first();
@@ -39,9 +39,10 @@ class DashboardController extends Controller
         foreach($students as $student){
             $b_aff = Brief::where('Apprenant_id', $student->id)->get();
             foreach($b_aff as $brief){
-
+                // This is an array that will contain the total number of tasks in each brief.
                 $total_task_brief =  Tache::where('apprenant_P_brief_id', $brief->Preparation_brief_id )
                                                 ->get()->count();
+                // an array that will contain the total number of tasks completed for each brief.
                 $total_taskDone_brief = Tache::where('apprenant_P_brief_id', $brief->Preparation_brief_id )
                                                 ->where('Etat', 'terminer')
                                               ->get()->count();
