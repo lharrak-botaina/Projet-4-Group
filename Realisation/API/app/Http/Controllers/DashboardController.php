@@ -21,7 +21,7 @@ class DashboardController extends Controller
         return $years;
     }
 
-    public function formation(Request $request, $id)
+    public function formation_years(Request $request, $id)
     {
         $year = AnneFormation::findOrFail($id);
         $group = Groupes::where('Annee_formation_id', $year->id)->first();
