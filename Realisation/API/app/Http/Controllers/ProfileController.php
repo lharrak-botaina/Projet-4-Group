@@ -51,10 +51,28 @@ class ProfileController extends Controller
         Auth::logout();
 
         $user->delete();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
         return Redirect::to('/');
     }
+
+   public function GroupProfilePic (Request $request) {
+
+    $image = $request->file('file');
+    $imgName = time().'.'.$image->extension(); 
+    $image->move(public_path('images'),$imgName);  
+    return response()->json(['success'=>$imgName]);
+
+   }
+
+
+
+
+
+
+
+
+
+
+
 }

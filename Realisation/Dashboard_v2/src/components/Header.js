@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Avencement_student from "./Avencement_student";
-import Avencement_brief from "./Avencement_brief";
-import  Avencement_group  from './Avencement_group';
+import Dropzone from "dropzone";
+import Avencement_student from "./AvencementStudent";
+import Avencement_brief from "./AvencementBrief";
+import  Avencement_group  from './AvencementGroup';
 
 
 export default class Header extends Component {
@@ -27,14 +28,6 @@ export default class Header extends Component {
     
   };
 
-  lastYear = () => {
-    axios.get("http://localhost:8000/api/lastY").then((res) => {
-      this.setState({
-        lastY : res.data.year
-      });
-    });
-  };
-
    getData = (e) => {
     axios.get('http://localhost:8000/api/group/'+e.target.value).then((res) => {
       this.setState({
@@ -49,8 +42,9 @@ export default class Header extends Component {
 
   componentDidMount() {
     this.getDatayears()
-    this.lastYear()
+    
   }
+
 
   render() {
     return (
@@ -67,22 +61,25 @@ export default class Header extends Component {
 
           <div className="row info">
             <div className="col-md-4">
-              {/* <img src="" alt="drag and drop"></img> */}
-              <span>{this.state.group.Nom_groupe}</span>
+        
+              <img src="" alt="Girl in a jacket" width="120" height="130"></img>
+          
+              <form action="/target" class="dropzone"></form>
             </div>
             <div className="col-md-4 info">
-              <h3><i class="fa-solid fa-users-line"></i> {this.state.studentCount} Stagiaires de ce groupe :</h3>
+              <h6><i class="fa-solid fa-users-line"></i> {this.state.studentCount} Stagiaires dans le groupe "{this.state.group.Nom_groupe}" :</h6>
             </div>
             <div className="col-md-4"></div>
           </div>
         </div>
 
-        <div className="row etatAv">
+        <div className="row">
             <div className="col-md-6">
                 <Avencement_group data={this.state.group_av}/>
                 <Avencement_brief data={this.state.briefs_av} />
             </div>
-            <div className="col-md-6 etatAvSt">
+            {/*  */}
+            <div className="col-md-6">
                 <Avencement_student data={this.state.brief_affs}/>
             </div>
         </div>

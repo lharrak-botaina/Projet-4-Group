@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    //
+
     public function years()
     {
         $years = AnneFormation::all();
@@ -26,58 +26,37 @@ class DashboardController extends Controller
         $year = AnneFormation::findOrFail($id);
         $group = Groupes::where('Annee_formation_id', $year->id)->first();
         $studentCount = $group->students->count();
-
-        $brief_aff = $group->students->map(function ($student) {
-            return $student->student_preparation_brief;
-        })->unique('id');
-
+        $brief_aff = $group->students->map(function ($student){return $student->student_preparation_brief;})->unique('id');
         $brief_info = [];
         $students = $group->students()->get();
+        // 
+        $total_done = Tache::where('Etat','=','terminer')->get()->count();
+        $total_pause = Tache::where('Etat','=','en pause')->get()->count();
+        $total_standby = Tache::where('Etat','=','en cours')->get()->count();
+        $total_states = ($total_done + $total_pause + $total_standby);
+        $group_progress = ($total_done * 100)/$total_states;
+        // 
+        $brief_name = PreparationBrief::all('Nom_du_Brief');
+        $brief_count = PreparationBrief::all('Nom_du_Brief')->count();
 
-        $total_tasks_briefs = [];
-        $total_tasksDone_briefs = [];
-        foreach($students as $student){
-            $b_aff = Brief::where('Apprenant_id', $student->id)->get();
-            foreach($b_aff as $brief){
 
-                $total_task_brief =  Tache::where('apprenant_P_brief_id', $brief->Preparation_brief_id )
-                                                ->get()->count();
-                $total_taskDone_brief = Tache::where('apprenant_P_brief_id', $brief->Preparation_brief_id )
-                                                ->where('Etat', 'terminer')
-                                              ->get()->count();
-                if($total_task_brief != 0){
-                    $brief_av = (100 / $total_task_brief)*$total_taskDone_brief;
-                    $brief_name = PreparationBrief::where('id', $brief->Preparation_brief_id)->first()->Nom_du_brief;
-                    $arr1 = [
-                        'brief_av' => $brief_av,
-                        'brief_name' => $brief_name
-                    ];
-                    array_push($brief_info, $arr1);
-                }
-                array_push($total_tasks_briefs, $total_task_brief);
-                array_push($total_tasksDone_briefs, $total_taskDone_brief);
-            }
-
-        }
-        array_pop($total_tasks_briefs);
-        array_pop($total_tasksDone_briefs);
-        $total_tasks_briefs_count = array_sum($total_tasks_briefs);
-        $total_tasksDone_briefs_count = array_sum($total_tasksDone_briefs);
-        if($total_tasks_briefs_count != 0){
-            $group_av = (100/$total_tasks_briefs_count)*$total_tasksDone_briefs_count;
-        }else{
-            $group_av = 0;
-        }
+        // To add Av here.
+        $arr1 = []; 
+        array_push($brief_info, $arr1);
 
         return [
             'year' => $year,
             'group' => $group,
             'studentCount' => $studentCount,
             'brief_aff' => $brief_aff,
-            'briefs' => $brief_info,
-            'group_av' => $group_av
+            'briefs' => $brief_name,$brief_info,
+            'group_av' => intval($group_progress),
         ];
     }
+
+
+
+
 
     public function studentAv(){
         $students = Apprenant::all();
@@ -114,58 +93,4 @@ class DashboardController extends Controller
 
     }
 
-
-    //get the last year
-//     public function lastYear()
-//     {
-//         $year = Formation_year::all()->last();
-//         $group = Group::where('formation_id', $year->id)->first();
-//         $studentCount = $group->students->count();
-
-//         $brief_aff = $group->students->map(function ($student) {
-//             return $student->student_preparation_brief;
-//         })->unique('id');
-
-//         $brief_info = [];
-//         $students = $group->students()->get();
-
-//         $total_tasks_briefs = [];
-//         $total_tasksDone_briefs = [];
-//         foreach($students as $student){
-//             $b_aff = Student_brief::where('student_id', $student->id)->get();
-//             foreach($b_aff as $brief){
-
-//                 $total_task_brief =  Task::where('preparation_brief_id', $brief->preparation_brief_id)
-//                                                 ->get()->count();
-//                 $total_taskDone_brief = Task::where('preparation_brief_id', $brief->preparation_brief_id)
-//                                                 ->where('state', 'done')
-//                                               ->get()->count();
-//                 if($total_task_brief != 0){
-//                     $brief_av = (100 / $total_task_brief)*$total_taskDone_brief;
-//                     $brief_name = Preparation_brief::where('id', $brief->preparation_brief_id)->first()->name;
-//                     $arr1 = [
-//                         'brief_av' => $brief_av,
-//                         'brief_name' => $brief_name
-//                     ];
-//                     array_push($brief_info, $arr1);
-//                 }
-//                 array_push($total_tasks_briefs, $total_task_brief);
-//                 array_push($total_tasksDone_briefs, $total_taskDone_brief);
-//             }
-
-//         }
-//         array_pop($total_tasks_briefs);
-//         array_pop($total_tasksDone_briefs);
-//         $total_tasks_briefs_count = array_sum($total_tasks_briefs);
-//         $total_tasksDone_briefs_count = array_sum($total_tasksDone_briefs);
-//         $group_av = (100/$total_tasks_briefs_count)*$total_tasksDone_briefs_count;
-//         return [
-//             'year' => $year,
-//             'group' => $group,
-//             'studentCount' => $studentCount,
-//             'brief_aff' => $brief_aff,
-//             'briefs' => $brief_info,
-//             'group_av' => $group_av
-//         ];
-// }
 }

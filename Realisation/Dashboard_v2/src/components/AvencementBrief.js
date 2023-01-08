@@ -6,20 +6,18 @@ export class Avencement_brief extends Component {
         super(props)
     }
 
-
-
-  render() {
+render() {
     return (
         <div class="shadow-lg p-3 mb-5 bg-body rounded">
             <h4><i class="fa-solid fa-file-circle-check"></i> Etat d'avancement des Briefs :</h4>
-            <div>
-                {this.props.data.map(item=>(
-                    <><span>{item?.brief_name}</span>
-                    <ProgressBar  now={item?.brief_av} label={`${item?.brief_av}%`}/>
-                    </>
-                ))}
-            </div>
-        </div>
+             
+    <div>
+    {this.props.data.map(item => (
+    <><br></br>
+    <i class="fa-solid fa-paperclip"></i><span>{item?.Nom_du_Brief}</span>
+    <ProgressBar now={ item?.brief_av} label={`${item?.brief_av}%`}/></>) )}
+    </div>
+    </div>
     )
   }
 }

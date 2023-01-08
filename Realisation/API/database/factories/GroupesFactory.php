@@ -25,7 +25,6 @@ class GroupesFactory extends Factory
             "Nom_groupe"=>$this->faker->name(),
             "Annee_formation_id"=>$this->faker->randomElement($annee_formation),
             'Formateur_id'=> $this->faker->randomElement($formateur),
-
             "Logo"=>$this->faker->imageUrl(true, 'Faker',true),
         ];
     }

@@ -4,26 +4,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 export class Avencement_group extends Component {
-    constructor(props){
+    constructor(props)
+    {
         super(props)
     }
 
-
-  render() {
+render() {
     if (this.props.data < 70) {
       let group_progress =  <ProgressBar variant="warning" now={this.props.data} label={`${this.props.data}%`}/>
       return (
         <div class="border-bottom shadow-lg p-3 mb-5 bg-body rounded">
-     
-          <h4> <i class="fa-solid fa-user-group"></i> Etat d'avancement du Group :</h4>
-          
-           <div>
-                 {group_progress}
-           </div>
+          <h4> 
+            <i class="fa-solid fa-user-group"></i> Etat d'avancement du Group :
+          </h4>
+            <div>
+              {group_progress}
+            </div>
         </div>
-      )
+)
     } else {
-      let group_progress =  <ProgressBar variant="info" now={this.props.data} label={`${this.props.data}%`}/>
+      let group_progress =  <ProgressBar variant="success" now={this.props.data} label={`${this.props.data}%`}/>
       return (
         <div class="border-bottom shadow-lg p-3 mb-5 bg-body rounded">
           <FontAwesomeIcon icon="fa-solid fa-user-group" /><h4>Etat d'avancement du Group :</h4>
@@ -33,7 +33,6 @@ export class Avencement_group extends Component {
         </div>
       )
     }
-
   }
 }
 
