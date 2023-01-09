@@ -26,7 +26,7 @@ class TacheFactory extends Factory
             "Preparation_tache_id"=>$this->faker->randomElement($preparationTache),
             "Apprenant_id"=>$this->faker->randomElement($apprenant),
             "Apprenant_P_Brief_id"=>$this->faker->randomElement($ApprenantPreparationBrief),
-            "Etat"=>$this->faker->randomElement(['en pause', 'terminer', 'en cours']) ,
+            "Etat"=>$this->faker->randomElement(['terminer', 'en cours']) ,
             "date_debut"=>$this->faker->date(),
             "date_fin"=>$this->faker->date(),
             "preparation_brief_id" => $this->faker->randomElement($preparation_brief_id),

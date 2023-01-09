@@ -33,9 +33,11 @@ export default class Header extends Component {
       this.setState({
         group: res.data.group,
         studentCount: res.data.studentCount,
-        brief_affs : res.data.brief_aff[0],
+        // brief_affs : res.data.brief_aff[0],
+        brief_affs : res.data.briefs,
         briefs_av : res.data.briefs,
-        group_av : res.data.group_av
+        group_av : res.data.group_av,
+        Logo : res.data.group.Logo
       });
     });
   };
@@ -50,7 +52,7 @@ export default class Header extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col-md-4 selectY">
+          <div className="col-md-4">
             <select onChange={this.getData} placeholder="année" id="input" class="form-select">
               <option>Année</option>
               {this.state.years.map((item) => (
@@ -62,12 +64,13 @@ export default class Header extends Component {
           <div className="row info">
             <div className="col-md-4">
         
-              <img src="" alt="Girl in a jacket" width="120" height="130"></img>
-          
+              <img src={this.state.Logo} alt={this.state.Logo}  width="120" height="130"></img>
+          <br></br>
               <form action="/target" class="dropzone"></form>
             </div>
-            <div className="col-md-4 info">
-              <h6><i class="fa-solid fa-users-line"></i> {this.state.studentCount} Stagiaires dans le groupe "{this.state.group.Nom_groupe}" :</h6>
+            <div className="col-md-6">
+<h5><i class="fa-solid fa-users-line"></i> {this.state.studentCount} Stagiaires dans le groupe "{this.state.group.Nom_groupe}" :
+</h5>
             </div>
             <div className="col-md-4"></div>
           </div>

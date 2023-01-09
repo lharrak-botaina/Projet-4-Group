@@ -13,18 +13,18 @@ export class Avencement_student extends Component {
     }
     onChange = (e)=>{
         let valueSelect = e.target.value
+        console.log(valueSelect)
         let studentAvs = this.state.studentAvs
-        let students_avs = []
         for(var i in studentAvs){
             let studentAv = studentAvs[i]
-            if(studentAv.brief == valueSelect){
-                studentAv = studentAvs[i]
-                students_avs.push(studentAv)
-            }
+            console.log(studentAv)
+        
         }
         this.setState({
-            students_av : students_avs
+            students_av : studentAvs
         })
+        
+    
     }
     getData = ()=>{
         axios.get('http://localhost:8000/api/studentAv')
@@ -47,12 +47,11 @@ export class Avencement_student extends Component {
 <div>
 
     <select onChange={this.onChange} class="form-select"  placeholder="Brief" id="input">
-      <option>Brief</option>{this.props.data.map((item) =>(<option value={item?.id}>{item?.brief_name}</option>))}
+      <option>Brief</option>{this.props.data.map((item) =>(<option value={item?.id}>{item?.Nom_du_Brief}</option>))}
     </select>
-
 <br></br>
     {this.state.students_av.map(item =>(
-    <><p> <i class="fa-regular fa-user"></i> {item.student_name} 
+    <><p> <i class="fa-regular fa-user"></i>{item.student_name} 
     <ProgressBar now={item.av} label={`${item.av}%`}/></p>
     
     </>))}

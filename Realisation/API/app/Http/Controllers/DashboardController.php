@@ -12,6 +12,7 @@ use App\Models\PreparationBrief;
 use App\Models\Tache;
 use Illuminate\Http\Request;
 
+
 class DashboardController extends Controller
 {
 
@@ -41,9 +42,14 @@ class DashboardController extends Controller
 
 
         // To add Av here.
-        $arr1 = []; 
-        array_push($brief_info, $arr1);
+       $arr1 = 
+       [
+        'av' => 50,
+       ];
+       
+       
 
+        array_push($brief_info);
         return [
             'year' => $year,
             'group' => $group,
@@ -77,7 +83,7 @@ class DashboardController extends Controller
                 $name = $student->Nom;
                 $studentAv = ((100/$totalTasks)*($task_done));
                 $arr[] = [
-                    'student_name' =>$name,
+                    'student_name' => $name,
                     'av' => $studentAv,
                     'brief' => $brief_id,
                     'student_id' => $student_id,
