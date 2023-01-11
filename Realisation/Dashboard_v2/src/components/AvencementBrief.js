@@ -4,6 +4,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 export class Avencement_brief extends Component {
     constructor(props){
         super(props)
+        console.log(props.data)
     }
 
 render() {
@@ -15,7 +16,7 @@ render() {
     {this.props.data.map(item => (
     <><br></br>
     <i class="fa-solid fa-paperclip"></i><span>{item?.Nom_du_Brief}</span>
-    <ProgressBar now={ item?.brief_av} label={`${item?.brief_av}%`}/></>) )}
+    <ProgressBar now={ 50} label={`${50}%`}/></>) )}
     </div>
     </div>
     )

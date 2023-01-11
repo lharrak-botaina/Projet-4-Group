@@ -17,7 +17,7 @@ export class Avencement_student extends Component {
         let studentAvs = this.state.studentAvs
         for(var i in studentAvs){
             let studentAv = studentAvs[i]
-            console.log(studentAv)
+            // console.log(studentAv)
         
         }
         this.setState({
@@ -32,7 +32,7 @@ export class Avencement_student extends Component {
             this.setState({
                 studentAvs : res.data.arr
             })
-            console.log(res.data.arr)
+            // console.log(res.data.arr)
         }))
     }
     componentDidMount() {
@@ -51,7 +51,7 @@ export class Avencement_student extends Component {
     </select>
 <br></br>
     {this.state.students_av.map(item =>(
-    <><p> <i class="fa-regular fa-user"></i>{item.student_name} 
+    <><p> <i class="fa-regular fa-user"></i> {item.student_name} 
     <ProgressBar now={item.av} label={`${item.av}%`}/></p>
     
     </>))}

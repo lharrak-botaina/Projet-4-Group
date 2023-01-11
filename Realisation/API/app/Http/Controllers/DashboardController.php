@@ -22,7 +22,7 @@ class DashboardController extends Controller
         return $years;
     }
 
-    public function formation_years(Request $request, $id)
+    public function formation(Request $request, $id)
     {
         $year = AnneFormation::findOrFail($id);
         $group = Groupes::where('Annee_formation_id', $year->id)->first();
@@ -38,24 +38,30 @@ class DashboardController extends Controller
         $group_progress = ($total_done * 100)/$total_states;
         // 
         $brief_name = PreparationBrief::all('Nom_du_Brief');
-        $brief_count = PreparationBrief::all('Nom_du_Brief')->count();
-
+        $brief_id = PreparationBrief::all('id');
+        // $brief_count = PreparationBrief::all('Nom_du_Brief')->count();
+     
+        
+        
 
         // To add Av here.
        $arr1 = 
        [
-        'av' => 50,
+        'brief_av' => 50,
        ];
+
        
+     
        
 
-        array_push($brief_info);
+        array_push($brief_info, $arr1);
         return [
             'year' => $year,
             'group' => $group,
             'studentCount' => $studentCount,
             'brief_aff' => $brief_aff,
-            'briefs' => $brief_name,$brief_info,
+            'briefs' => $brief_name,
+            'briefs_av' => $brief_info,
             'group_av' => intval($group_progress),
         ];
     }
