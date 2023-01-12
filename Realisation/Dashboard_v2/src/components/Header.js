@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Dropzone from "dropzone";
 import Avencement_student from "./AvencementStudent";
 import Avencement_brief from "./AvencementBrief";
 import  Avencement_group  from './AvencementGroup';

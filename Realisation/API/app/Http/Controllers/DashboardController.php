@@ -26,7 +26,9 @@ class DashboardController extends Controller
     {
         $year = AnneFormation::findOrFail($id);
         $group = Groupes::where('Annee_formation_id', $year->id)->first();
+        // 
         $studentCount = $group->students->count();
+        // dump($studentCount);
         $brief_aff = $group->students->map(function ($student){return $student->student_preparation_brief;})->unique('id');
         $brief_info = [];
         $students = $group->students()->get();
@@ -34,6 +36,7 @@ class DashboardController extends Controller
         $total_done = Tache::where('Etat','=','terminer')->get()->count();
         $total_pause = Tache::where('Etat','=','en pause')->get()->count();
         $total_standby = Tache::where('Etat','=','en cours')->get()->count();
+        // 
         $total_states = ($total_done + $total_pause + $total_standby);
         $group_progress = ($total_done * 100)/$total_states;
         // 
@@ -61,10 +64,8 @@ class DashboardController extends Controller
        [
         'brief_av' => 50,
        ];
-
-       
-     
         array_push($brief_info, $arr1);
+
         return [
             'year' => $year,
             'group' => $group,
