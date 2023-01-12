@@ -15,7 +15,7 @@ class FormateurFactory extends Factory
     {
         return [
 
-            "Nom_formateur"=>$this->faker->firstName(),
+            "Nom_formateur"=> "nom formateur" . $this->faker->firstName(),
             "Prenom_formateur"=>$this->faker->lastName(),
             "Email_formateur"=>$this->faker->email(),
             "Phone"=>$this->faker->phoneNumber(),

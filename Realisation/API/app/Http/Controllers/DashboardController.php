@@ -39,12 +39,24 @@ class DashboardController extends Controller
         // 
         $brief_name = PreparationBrief::all('Nom_du_Brief');
         $brief_id = PreparationBrief::all('id');
-        // $brief_count = PreparationBrief::all('Nom_du_Brief')->count();
-     
-        
-        
+        // 
+        $brief_count = PreparationBrief::all('id')->count();
+        // $total_done_task = Tache::where('Etat','=','terminer')->get()->where('preparation_brief_id', '=', 4)->count();
+      
+        $tasks = Tache::all();
+        $tasks_ids = [];
+        foreach ($tasks as $task) {
+         $tasks_ids[] =  $task->id;
+          }
+        // dump($tasks_ids);
 
-        // To add Av here.
+        foreach ($tasks_ids as $key => $val) {
+         $total_done_task = Tache::where('Etat','=','terminer')->get()->where('preparation_brief_id', '=', 4)->count();
+        
+        }
+     
+
+       // To add Av here.
        $arr1 = 
        [
         'brief_av' => 50,
@@ -52,8 +64,6 @@ class DashboardController extends Controller
 
        
      
-       
-
         array_push($brief_info, $arr1);
         return [
             'year' => $year,
