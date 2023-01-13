@@ -1,13 +1,8 @@
-
 import './App.css';
-import Header from './components/Header';
+import Selector from './components/Selector';
 
-function App() {
+export default function App() {
   return (
-    <div className='container'>
-      <Header />
-    </div>
+    <div className='container'><Selector/></div>
   );
 }
-
-export default App;

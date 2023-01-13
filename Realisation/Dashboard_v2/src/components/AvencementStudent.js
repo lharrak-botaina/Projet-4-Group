@@ -2,65 +2,49 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-export class Avencement_student extends Component {
+export default class Avencement_student extends Component {
     constructor(props){
         super(props)
         this.state = {
-            valueSelect : '',
-            studentAvs : [],
-            students_av : [],
+            selectValue : '',
+            studentAdvencements : [], studentsData : [], studentState : [],
         }
     }
-    onChange = (e)=>{
-        let valueSelect = e.target.value
-        console.log(valueSelect)
-        let studentAvs = this.state.studentAvs
-        for(var i in studentAvs){
-            let studentAv = studentAvs[i]
-            // console.log(studentAv)
-        
-        }
-        this.setState({
-            students_av : studentAvs
-        })
-        
-    
+    onChange =(e)=>
+    {
+        let selectValue = e.target.value
+        console.log(selectValue)
+        let studentAdvencements = this.state.studentAdvencements
+        for(var i in studentAdvencements){let studentAdvencements = studentAdvencements[i]}
+        this.setState({studentsData : studentAdvencements})
     }
-    getData = ()=>{
+
+    getStudentdata =()=>
+    {
         axios.get('http://localhost:8000/api/studentAv')
-        .then((res=>{
-            this.setState({
-                studentAvs : res.data.arr
-            })
-            // console.log(res.data.arr)
+        .then((res =>{this.setState({studentsData : res.data.arr})
+        console.log(res.data.arr)
         }))
     }
-    componentDidMount() {
-        this.getData()
-      }
+
+// Double check (update.).
+componentDidMount(){this.getStudentdata()}
+componentDidUpdate(){this.getStudentdata()}
 
   render() {
-    return (
+    // default values
+    var item = {av : '10'}
+    var Studentprogress = <ProgressBar now={item.av} label={`${item.av}%`}/>;
+return (
 <div class="border-bottom shadow-lg p-3 mb-5 bg-body rounded">
-      <h4> <i class="fa-solid fa-user"></i> Etat d'avancement des Apprenants par Brief :</h4>
-
+      <h4><i class="fa-solid fa-user"></i> Etat d'avancement des Apprenants par Brief :</h4>
 <div>
-
     <select onChange={this.onChange} class="form-select"  placeholder="Brief" id="input">
       <option>Brief</option>{this.props.data.map((item) =>(<option value={item?.id}>{item?.Nom_du_Brief}</option>))}
     </select>
 <br></br>
-    {this.state.students_av.map(item =>(
-    <><p> <i class="fa-regular fa-user"></i> {item.student_name} 
-    <ProgressBar now={item.av} label={`${item.av}%`}/></p>
-    
-    </>))}
-     </div>
-      
-       
-</div>
-    )
-  }
+    {this.state.studentsData.map(item =>(<><p><i class="fa-regular fa-user"></i> {item.student_name} :
+    <ProgressBar now={item.av} label={`${item.av}%`}/> </p></>))}
+</div>   
+</div>)}
 }
-
-export default Avencement_student
