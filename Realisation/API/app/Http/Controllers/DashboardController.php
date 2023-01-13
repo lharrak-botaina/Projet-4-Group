@@ -26,26 +26,26 @@ class DashboardController extends Controller
     {
         $year = AnneFormation::findOrFail($id);
         $group = Groupes::where('Annee_formation_id', $year->id)->first();
-        // 
+        //
         $studentCount = $group->students->count();
         // dump($studentCount);
         $brief_aff = $group->students->map(function ($student){return $student->student_preparation_brief;})->unique('id');
         $brief_info = [];
         $students = $group->students()->get();
-        // 
+        //
         $total_done = Tache::where('Etat','=','terminer')->get()->count();
         $total_pause = Tache::where('Etat','=','en pause')->get()->count();
         $total_standby = Tache::where('Etat','=','en cours')->get()->count();
-        // 
+        //
         $total_states = ($total_done + $total_pause + $total_standby);
         $group_progress = ($total_done * 100)/$total_states;
-        // 
+        //
         $brief_name = PreparationBrief::all('Nom_du_Brief');
         $brief_id = PreparationBrief::all('id');
-        // 
+        //
         $brief_count = PreparationBrief::all('id')->count();
         // $total_done_task = Tache::where('Etat','=','terminer')->get()->where('preparation_brief_id', '=', 4)->count();
-      
+
         $tasks = Tache::all();
         $tasks_ids = [];
         foreach ($tasks as $task) {
@@ -55,12 +55,12 @@ class DashboardController extends Controller
 
         foreach ($tasks_ids as $key => $val) {
          $total_done_task = Tache::where('Etat','=','terminer')->get()->where('preparation_brief_id', '=', 4)->count();
-        
+
         }
-     
+
 
        // To add Av here.
-       $arr1 = 
+       $arr1 =
        [
         'brief_av' => 50,
        ];
